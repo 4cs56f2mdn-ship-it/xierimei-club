@@ -832,7 +832,319 @@ details[open] .chev{transform:rotate(180deg)}
   }
 }
 
-</style>
+
+
+/* WWDC25 high readability install start */
+/* 实装目标：让图标在真实雾面网页背景、渐变区、导航栏、卡片上都更清楚。 */
+:root{
+  --icon-frost-bg-1: rgba(255,255,255,.90);
+  --icon-frost-bg-2: rgba(237,241,246,.86);
+  --icon-frost-border: rgba(255,255,255,.82);
+  --icon-frost-shadow: rgba(32,50,74,.16);
+  --icon-frost-shadow-soft: rgba(52,73,96,.10);
+  --icon-glyph: rgba(132,145,162,.98);
+  --icon-glyph-soft: rgba(245,249,255,.96);
+}
+
+.wwdc25-icon,
+.brand-orb .brand-wwdc,
+.chev .chevron-icon,
+.spot-cover-icon .spot-wwdc,
+.dock a .dock-icon{
+  color: var(--icon-glyph) !important;
+  background:
+    radial-gradient(120% 58% at 50% -6%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.56) 36%, rgba(255,255,255,0) 74%),
+    radial-gradient(40% 18% at 73% 92%, rgba(255,137,145,.20) 0%, rgba(255,137,145,0) 70%),
+    radial-gradient(42% 20% at 63% 95%, rgba(255,225,123,.22) 0%, rgba(255,225,123,0) 64%),
+    radial-gradient(40% 20% at 76% 94%, rgba(161,237,203,.22) 0%, rgba(161,237,203,0) 64%),
+    radial-gradient(44% 22% at 82% 93%, rgba(168,212,255,.22) 0%, rgba(168,212,255,0) 64%),
+    linear-gradient(180deg, var(--icon-frost-bg-1) 0%, var(--icon-frost-bg-2) 100%) !important;
+  border: 1px solid var(--icon-frost-border) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.92),
+    inset 0 -1px 0 rgba(198,208,220,.42),
+    inset 0 0 0 1px rgba(255,255,255,.18),
+    0 8px 20px var(--icon-frost-shadow),
+    0 2px 6px var(--icon-frost-shadow-soft) !important;
+  backdrop-filter: blur(7px) saturate(122%) !important;
+  -webkit-backdrop-filter: blur(7px) saturate(122%) !important;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.wwdc25-icon::before,
+.brand-orb .brand-wwdc::before,
+.chev .chevron-icon::before,
+.spot-cover-icon .spot-wwdc::before,
+.dock a .dock-icon::before{
+  content:"";
+  position:absolute;
+  inset:2px 3px auto;
+  height:40%;
+  border-radius:inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.08));
+  pointer-events:none;
+  z-index:0;
+}
+
+.wwdc25-icon::after,
+.brand-orb .brand-wwdc::after,
+.chev .chevron-icon::after,
+.spot-cover-icon .spot-wwdc::after,
+.dock a .dock-icon::after{
+  content:"";
+  position:absolute;
+  left:12%;
+  right:12%;
+  bottom:5%;
+  height:18%;
+  border-radius:999px;
+  background: linear-gradient(90deg,
+    rgba(255,145,145,0) 0%,
+    rgba(255,145,145,.24) 18%,
+    rgba(255,225,128,.28) 38%,
+    rgba(154,234,204,.24) 62%,
+    rgba(156,212,255,.20) 82%,
+    rgba(156,212,255,0) 100%);
+  filter: blur(2px);
+  pointer-events:none;
+  z-index:0;
+}
+
+.wwdc25-icon svg,
+.brand-orb .brand-wwdc svg,
+.chev .chevron-icon svg,
+.spot-cover-icon .spot-wwdc svg,
+.dock a .dock-icon svg{
+  position:relative;
+  z-index:2;
+  overflow: visible;
+  filter:
+    drop-shadow(0 1px 0 rgba(255,255,255,.92))
+    drop-shadow(0 0 1px rgba(255,255,255,.80))
+    drop-shadow(0 1px 2px rgba(114,128,149,.34));
+}
+
+.wwdc25-icon svg g,
+.wwdc25-icon svg path,
+.wwdc25-icon svg circle,
+.wwdc25-icon svg rect,
+.wwdc25-icon svg line,
+.wwdc25-icon svg polyline,
+.wwdc25-icon svg polygon,
+.brand-orb .brand-wwdc svg g,
+.brand-orb .brand-wwdc svg path,
+.brand-orb .brand-wwdc svg circle,
+.brand-orb .brand-wwdc svg rect,
+.chev .chevron-icon svg g,
+.chev .chevron-icon svg path,
+.spot-cover-icon .spot-wwdc svg g,
+.spot-cover-icon .spot-wwdc svg path,
+.dock a .dock-icon svg g,
+.dock a .dock-icon svg path{
+  stroke: var(--icon-glyph) !important;
+  stroke-width: 2.18 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+/* Dock 单独增强：实际背景上必须最清楚 */
+.dock a .dock-icon{
+  width: 31px !important;
+  height: 31px !important;
+  border-radius: 10px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.94),
+    inset 0 -1px 0 rgba(198,208,220,.44),
+    0 5px 12px rgba(31,52,76,.18),
+    0 1px 4px rgba(31,52,76,.09) !important;
+}
+
+.dock a.active .dock-icon{
+  transform: translateY(-1px) scale(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.96),
+    inset 0 -1px 0 rgba(189,203,219,.46),
+    0 7px 16px rgba(31,52,76,.22),
+    0 1px 4px rgba(31,52,76,.12) !important;
+}
+
+
+
+/* 顶部品牌块和机位块比原版更稳重，不要过度彩色 */
+.brand-orb .brand-wwdc{
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 15px !important;
+}
+
+.spot-cover-icon .spot-wwdc{
+  width: 54px !important;
+  height: 54px !important;
+  border-radius: 18px !important;
+}
+
+.chev .chevron-icon{
+  width: 25px !important;
+  height: 25px !important;
+  border-radius: 9px !important;
+}
+
+/* 按钮、外链、小功能图标全部同步成同一材质语言 */
+.baby-nav-head::before,
+.baby-map-btn::before,
+.link::after,
+.sources a::after,
+.timetable-btn::after,
+.spot-map-actions a::after,
+.route-stop::after,
+.audit-badge::before,
+.free-card li::before,
+.priority-lane div:not(:last-child)::after{
+  border: 1px solid rgba(255,255,255,.80) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.90),
+    0 4px 10px rgba(32,52,75,.12) !important;
+}
+
+/* 小图标保持图义，但统一改成白雾材质背景，提升在真实卡片上的清晰度 */
+.baby-nav-head::before,
+.baby-map-btn::before,
+.link::after,
+.sources a::after,
+.timetable-btn::after,
+.spot-map-actions a::after,
+.route-stop::after,
+.audit-badge::before,
+.free-card li::before,
+.priority-lane div:not(:last-child)::after{
+  background-color: transparent !important;
+  background-image:
+    radial-gradient(118% 56% at 50% -6%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.56) 34%, rgba(255,255,255,0) 72%),
+    radial-gradient(40% 18% at 73% 92%, rgba(255,137,145,.18) 0%, rgba(255,137,145,0) 70%),
+    radial-gradient(42% 20% at 63% 95%, rgba(255,225,123,.18) 0%, rgba(255,225,123,0) 64%),
+    radial-gradient(40% 20% at 76% 94%, rgba(161,237,203,.18) 0%, rgba(161,237,203,0) 64%),
+    radial-gradient(44% 22% at 82% 93%, rgba(168,212,255,.18) 0%, rgba(168,212,255,0) 64%) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+/* 继续保留原图义的 data-uri 图像；这里只加强字和面板对比 */
+.baby-nav,
+.route-place,
+.transit-schedule,
+.baby-map-btn,
+.timetable-btn,
+.sources a,
+.link{
+  text-shadow: none !important;
+}
+
+/* 在浅色区/渐变区/卡片上更清楚 */
+.section-head h2,
+.day-title h3,
+.route-place-name,
+.baby-nav-head{
+  color: rgba(31,45,58,.98) !important;
+}
+
+@media (max-width: 520px){
+  .dock a .dock-icon{
+    width: 30px !important;
+    height: 30px !important;
+  }
+}
+/* WWDC25 high readability install end */
+
+/* =========================================================
+   DOCK 雕刻图标 · 最终段（覆盖此前所有 dock 图标规则）
+   思路：小尺寸不做细线，改做"在玻璃上凿出来"的实心剪影。
+   浮雕不用 filter 模糊，改用三层同形矢量路径互相错位，
+   因此在任何分辨率下边缘都是锐的，不会糊。
+   ========================================================= */
+.dock a .dock-icon{
+  /* 整数几何：30px 面 / 9px 圆角 / 18px 字形，全部落在物理像素上 */
+  width:30px!important;
+  height:30px!important;
+  border-radius:9px!important;
+  background:
+    linear-gradient(163deg,#ffffff 0%,#fbfcfe 46%,#eef2f7 100%)!important;
+  border:1px solid rgba(255,255,255,.95)!important;
+  box-shadow:
+    0 0 0 .5px rgba(120,142,168,.3),
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(160,176,196,.5),
+    0 4px 10px rgba(28,52,80,.16)!important;
+  overflow:hidden;
+  isolation:isolate;
+}
+/* 玻璃自身的高光与虹彩退到剪影后面，且压低，避免干扰边缘 */
+.dock a .dock-icon::before{
+  inset:1px 1px auto!important;
+  height:44%!important;
+  border-radius:8px 8px 60% 60%!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,0))!important;
+  opacity:.85!important;
+  z-index:0!important;
+}
+.dock a .dock-icon::after{
+  left:18%!important;right:18%!important;bottom:2px!important;top:auto!important;
+  width:auto!important;height:22%!important;border-radius:50%!important;
+  background:linear-gradient(102deg,#a6b7ff 4%,#aaffec 32%,#ffe4bb 62%,#ffa2cf 90%)!important;
+  -webkit-mask-image:radial-gradient(70% 150% at 50% 115%,#000 8%,transparent 78%);
+  mask-image:radial-gradient(70% 150% at 50% 115%,#000 8%,transparent 78%);
+  opacity:.55!important;
+  filter:blur(1.6px) saturate(170%)!important;
+  z-index:0!important;
+}
+
+/* 字形本体：固定 18px，不用百分比，避免半像素 */
+.dock a .dock-icon .carve-glyph{
+  position:relative;
+  z-index:3;
+  width:18px!important;
+  height:18px!important;
+  overflow:visible;
+  filter:none!important;              /* 关键：不再用模糊做浮雕 */
+  shape-rendering:geometricPrecision;
+}
+.dock a .dock-icon .carve-glyph *{
+  vector-effect:none!important;
+  stroke:none!important;              /* 覆盖旧的 stroke 注入 */
+}
+/* 凹刻三层：光从左上来，凹槽左上壁背光=暗，右下壁受光=亮 */
+.dock a .dock-icon .carve-glyph .cv-sh{fill:#8195ac;opacity:.62}
+.dock a .dock-icon .carve-glyph .cv-hi{fill:#ffffff;opacity:.95}
+.dock a .dock-icon .carve-glyph .cv-bd{fill:#c3cedc}
+
+/* 选中：凹槽更深一档，只改颜色与位移，不改阴影，避免重绘 */
+.dock a.active .dock-icon{
+  transform:translateY(-1.5px) scale(1.06);
+  box-shadow:
+    0 0 0 .5px rgba(120,142,168,.34),
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(150,168,190,.55),
+    0 6px 14px rgba(28,52,80,.2)!important;
+}
+.dock a.active .dock-icon::after{opacity:.8!important}
+.dock a.active .dock-icon .carve-glyph .cv-sh{fill:#6c8199}
+.dock a.active .dock-icon .carve-glyph .cv-bd{fill:#aebbcc}
+
+@media(max-width:380px){
+  .dock a .dock-icon{width:28px!important;height:28px!important;border-radius:8px!important}
+  .dock a .dock-icon .carve-glyph{width:17px!important;height:17px!important}
+}
+@media (prefers-reduced-motion:reduce){
+  .dock a.active .dock-icon{transform:none!important}
+}
+@media (prefers-contrast:more){
+  .dock a .dock-icon .carve-glyph .cv-sh,
+  .dock a .dock-icon .carve-glyph .cv-hi{display:none}
+  .dock a .dock-icon .carve-glyph .cv-bd{fill:#2f4a68}
+}
+/* DOCK 雕刻图标段 end */
+
+  </style>
 </head>
 <body>
 <div class="ambient a"></div><div class="ambient b"></div>
@@ -858,56 +1170,22 @@ details[open] .chev{transform:rotate(180deg)}
 <div class="glass-content dock-inner">
 <i aria-hidden="true" class="dock-marker"></i>
 <a class="active" href="#overview"><span class="wwdc-dock-slot"><span aria-hidden="true" class="wwdc25-icon dock-icon dock-blue">
-<svg aria-hidden="true" focusable="false" viewbox="0 0 24 24">
-<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
-<path d="M3.8 10.8 12 4.3l8.2 6.5"></path>
-<path d="M5.8 9.8v9.1h12.4V9.8"></path>
-<path d="M9.7 18.9v-5.3h4.6v5.3"></path>
-</g>
-</svg>
+<svg aria-hidden="true" focusable="false" viewbox="0 0 24 24" class="carve-glyph"><g class="cv-sh" transform="translate(-0.62 -0.68)"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.2 2.4 11.6h3v9.2h5.1v-5.4h3v5.4h5.1v-9.2h3L12 3.2Z"/></g><g class="cv-hi" transform="translate(0.66 0.74)"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.2 2.4 11.6h3v9.2h5.1v-5.4h3v5.4h5.1v-9.2h3L12 3.2Z"/></g><g class="cv-bd"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.2 2.4 11.6h3v9.2h5.1v-5.4h3v5.4h5.1v-9.2h3L12 3.2Z"/></g></svg>
 </span></span>总览</a>
 <a href="#itinerary"><span class="wwdc-dock-slot"><span aria-hidden="true" class="wwdc25-icon dock-icon dock-orange">
-<svg aria-hidden="true" focusable="false" viewbox="0 0 24 24">
-<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
-<rect height="14" rx="3.2" width="15.6" x="4.2" y="5.6"></rect>
-<path d="M7.8 3.9v3.4M16.2 3.9v3.4M4.2 9.1h15.6"></path>
-<path d="M8 12.4h2M14 12.4h2M8 16h2M14 16h2"></path>
-</g>
-</svg>
+<svg aria-hidden="true" focusable="false" viewbox="0 0 24 24" class="carve-glyph"><g class="cv-sh" transform="translate(-0.62 -0.68)"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.3 2.4h2v3.2h-2V2.4Zm7.4 0h2v3.2h-2V2.4ZM5.2 4.8h13.6a2.6 2.6 0 0 1 2.6 2.6v12.4a2.6 2.6 0 0 1-2.6 2.6H5.2a2.6 2.6 0 0 1-2.6-2.6V7.4a2.6 2.6 0 0 1 2.6-2.6ZM2.6 10h18.8v1.8H2.6V10ZM6.4 14.2h3.4v3.4H6.4v-3.4Zm3.9 0h3.4v3.4h-3.4v-3.4Zm3.9 0h3.4v3.4h-3.4v-3.4Z"/></g><g class="cv-hi" transform="translate(0.66 0.74)"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.3 2.4h2v3.2h-2V2.4Zm7.4 0h2v3.2h-2V2.4ZM5.2 4.8h13.6a2.6 2.6 0 0 1 2.6 2.6v12.4a2.6 2.6 0 0 1-2.6 2.6H5.2a2.6 2.6 0 0 1-2.6-2.6V7.4a2.6 2.6 0 0 1 2.6-2.6ZM2.6 10h18.8v1.8H2.6V10ZM6.4 14.2h3.4v3.4H6.4v-3.4Zm3.9 0h3.4v3.4h-3.4v-3.4Zm3.9 0h3.4v3.4h-3.4v-3.4Z"/></g><g class="cv-bd"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.3 2.4h2v3.2h-2V2.4Zm7.4 0h2v3.2h-2V2.4ZM5.2 4.8h13.6a2.6 2.6 0 0 1 2.6 2.6v12.4a2.6 2.6 0 0 1-2.6 2.6H5.2a2.6 2.6 0 0 1-2.6-2.6V7.4a2.6 2.6 0 0 1 2.6-2.6ZM2.6 10h18.8v1.8H2.6V10ZM6.4 14.2h3.4v3.4H6.4v-3.4Zm3.9 0h3.4v3.4h-3.4v-3.4Zm3.9 0h3.4v3.4h-3.4v-3.4Z"/></g></svg>
 </span></span>日程</a>
 <a href="#operations"><span class="wwdc-dock-slot"><span aria-hidden="true" class="wwdc25-icon dock-icon dock-cyan">
-<svg aria-hidden="true" focusable="false" viewbox="0 0 24 24">
-<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
-<circle cx="12" cy="12" r="8.2"></circle>
-<path d="m14.9 8.1-2 5-5 2 2-5 5-2Z"></path>
-<circle cx="12" cy="12" r="1.2"></circle>
-</g>
-</svg>
+<svg aria-hidden="true" focusable="false" viewbox="0 0 24 24" class="carve-glyph"><g class="cv-sh" transform="translate(-0.62 -0.68)"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.2a7.2 7.2 0 0 0-7.2 7.2c0 5.2 7.2 12.4 7.2 12.4s7.2-7.2 7.2-12.4A7.2 7.2 0 0 0 12 2.2ZM12 12a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4Z"/></g><g class="cv-hi" transform="translate(0.66 0.74)"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.2a7.2 7.2 0 0 0-7.2 7.2c0 5.2 7.2 12.4 7.2 12.4s7.2-7.2 7.2-12.4A7.2 7.2 0 0 0 12 2.2ZM12 12a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4Z"/></g><g class="cv-bd"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.2a7.2 7.2 0 0 0-7.2 7.2c0 5.2 7.2 12.4 7.2 12.4s7.2-7.2 7.2-12.4A7.2 7.2 0 0 0 12 2.2ZM12 12a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4Z"/></g></svg>
 </span></span>现场</a>
 <a href="#shopping"><span class="wwdc-dock-slot"><span aria-hidden="true" class="wwdc25-icon dock-icon dock-violet">
-<svg aria-hidden="true" focusable="false" viewbox="0 0 24 24">
-<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
-<path d="M5.3 8.2h13.4l-1 11H6.3l-1-11Z"></path>
-<path d="M8.6 8.2c0-2.3 1.4-3.8 3.4-3.8s3.4 1.5 3.4 3.8"></path>
-</g>
-</svg>
+<svg aria-hidden="true" focusable="false" viewbox="0 0 24 24" class="carve-glyph"><g class="cv-sh" transform="translate(-0.62 -0.68)"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.4c-2.7 0-4.9 2.2-4.9 4.9h2.4c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5h2.4c0-2.7-2.2-4.9-4.9-4.9ZM5.2 7.6h13.6l1.3 14H3.9l1.3-14Z"/></g><g class="cv-hi" transform="translate(0.66 0.74)"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.4c-2.7 0-4.9 2.2-4.9 4.9h2.4c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5h2.4c0-2.7-2.2-4.9-4.9-4.9ZM5.2 7.6h13.6l1.3 14H3.9l1.3-14Z"/></g><g class="cv-bd"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.4c-2.7 0-4.9 2.2-4.9 4.9h2.4c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5h2.4c0-2.7-2.2-4.9-4.9-4.9ZM5.2 7.6h13.6l1.3 14H3.9l1.3-14Z"/></g></svg>
 </span></span>购物</a>
 <a href="#spots"><span class="wwdc-dock-slot"><span aria-hidden="true" class="wwdc25-icon dock-icon dock-gold">
-<svg aria-hidden="true" focusable="false" viewbox="0 0 24 24">
-<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
-<rect height="11.7" rx="3.2" width="16.4" x="3.8" y="7.2"></rect>
-<path d="m8 7.2 1.2-2h5.6l1.2 2"></path>
-<circle cx="12" cy="13" r="3.3"></circle>
-</g>
-</svg>
+<svg aria-hidden="true" focusable="false" viewbox="0 0 24 24" class="carve-glyph"><g class="cv-sh" transform="translate(-0.62 -0.68)"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.2 3.8h5.6l1.4 2.4h3.4A2.8 2.8 0 0 1 22.4 9v9.4a2.8 2.8 0 0 1-2.8 2.8H4.4a2.8 2.8 0 0 1-2.8-2.8V9a2.8 2.8 0 0 1 2.8-2.8h3.4l1.4-2.4ZM12 9.5a4.2 4.2 0 1 0 0 8.4 4.2 4.2 0 0 0 0-8.4Z"/></g><g class="cv-hi" transform="translate(0.66 0.74)"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.2 3.8h5.6l1.4 2.4h3.4A2.8 2.8 0 0 1 22.4 9v9.4a2.8 2.8 0 0 1-2.8 2.8H4.4a2.8 2.8 0 0 1-2.8-2.8V9a2.8 2.8 0 0 1 2.8-2.8h3.4l1.4-2.4ZM12 9.5a4.2 4.2 0 1 0 0 8.4 4.2 4.2 0 0 0 0-8.4Z"/></g><g class="cv-bd"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.2 3.8h5.6l1.4 2.4h3.4A2.8 2.8 0 0 1 22.4 9v9.4a2.8 2.8 0 0 1-2.8 2.8H4.4a2.8 2.8 0 0 1-2.8-2.8V9a2.8 2.8 0 0 1 2.8-2.8h3.4l1.4-2.4ZM12 9.5a4.2 4.2 0 1 0 0 8.4 4.2 4.2 0 0 0 0-8.4Z"/></g></svg>
 </span></span>机位</a>
 <a href="#review"><span class="wwdc-dock-slot"><span aria-hidden="true" class="wwdc25-icon dock-icon dock-mint">
-<svg aria-hidden="true" focusable="false" viewbox="0 0 24 24">
-<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
-<circle cx="12" cy="12" r="8.3"></circle>
-<path d="m8.2 12.1 2.5 2.6 5.4-5.6"></path>
-</g>
-</svg>
+<svg aria-hidden="true" focusable="false" viewbox="0 0 24 24" class="carve-glyph"><g class="cv-sh" transform="translate(-0.62 -0.68)"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.4a9.6 9.6 0 1 0 0 19.2 9.6 9.6 0 0 0 0-19.2ZM13.2 6.6v5.7l3.7 2.2-1.2 2-4.9-2.9V6.6h2.4Z"/></g><g class="cv-hi" transform="translate(0.66 0.74)"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.4a9.6 9.6 0 1 0 0 19.2 9.6 9.6 0 0 0 0-19.2ZM13.2 6.6v5.7l3.7 2.2-1.2 2-4.9-2.9V6.6h2.4Z"/></g><g class="cv-bd"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.4a9.6 9.6 0 1 0 0 19.2 9.6 9.6 0 0 0 0-19.2ZM13.2 6.6v5.7l3.7 2.2-1.2 2-4.9-2.9V6.6h2.4Z"/></g></svg>
 </span></span>审时</a>
 </div>
 </nav>
@@ -918,7 +1196,7 @@ details[open] .chev{transform:rotate(180deg)}
 <h1>看见香港。<span>也带走喜欢。</span></h1>
 <p class="hero-sub">梧州 → 珠海 1 晚 → 澳门完整一日 → 当晚按捷程巴士票面夜赴深圳 → 深圳 5 晚 → 广州。香港只保留 D5、D6 两次日归；D6（8/26，农历七月十四）执行双规则：18:00 后不安排正式夜游景点，吃饭、购物、随手拍、室内休息与返程照常；20:00 离开最后一个景点／商铺并进入地铁返程。D7 留在深圳，退房后只做休息、取行李和深圳站候车。夜景集中在 D1 珠海城市阳台、D2 澳门半岛夜景段与 D5 幻彩咏香江三处，D6 中元节不加任何夜景。</p>
 <div class="hero-meta"><span class="hero-chip"><strong>8/21</strong> 珠海 1 晚</span><span class="hero-chip"><strong>8/22</strong> 澳门 → 夜赴深圳</span><span class="hero-chip"><strong>8/22—27</strong> 深圳 5 晚</span><span class="hero-chip"><strong>8/25</strong> 香港①＋HK1＋幻彩咏香江</span><span class="hero-chip"><strong>8/26</strong> 七月十四 · 18:00 后无夜游 / 20:00 上地铁返程</span><span class="hero-chip"><strong>香港入境</strong> 共 2 次</span><span class="hero-chip"><strong>D7 18:00</strong> 深圳站 → 广州东</span><span class="hero-chip"><strong>地图</strong> 高德＋Apple Maps</span></div>
-<div class="distortion-cue"><i></i>WWDC25 分层图标：半透明叠层、柔和渐变、圆润粗线条；主体仍为节能雾面毛玻璃。</div>
+<div class="distortion-cue"><i></i>图标已切换为高可读性 WWDC25 雾面玻璃风格：更高不透明度、更强浮雕对比、实际网页背景下更清楚。</div>
 </div>
 </section>
 <section>
@@ -1345,14 +1623,43 @@ details[open] .chev{transform:rotate(180deg)}
       });
 
       if (gsap && ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+
+      /* ---------- 滚动状态守卫 ----------
+         滚动过程中禁止任何重排式刷新与程序化跳转；
+         refresh 前后比对 scrollY，被弹走就立刻还原。 */
+      let isScrolling = false;
+      let pendingRefresh = false;
+      let scrollIdleTimer = 0;
+      let lastScrollEndAt = 0;
+      let lastViewportW = window.innerWidth;
+      let lastViewportH = window.innerHeight;
+
+      const doRefresh = () => {
+        if (!ScrollTrigger) return;
+        const before = window.scrollY;
+        ScrollTrigger.refresh();
+        if (Math.abs(window.scrollY - before) > 2) window.scrollTo(0, before);
+      };
+
+      const markScrolling = () => {
+        isScrolling = true;
+        clearTimeout(scrollIdleTimer);
+        scrollIdleTimer = setTimeout(() => {
+          isScrolling = false;
+          lastScrollEndAt = performance.now();
+          if (pendingRefresh) { pendingRefresh = false; doRefresh(); }
+        }, 260);
+      };
+      window.addEventListener('scroll', markScrolling, { passive: true });
       setState('雾面毛玻璃 · 已启用');
 
       let refreshTimer;
       const refreshVisuals = () => {
         clearTimeout(refreshTimer);
         refreshTimer = setTimeout(() => {
-          ScrollTrigger?.refresh();
-        }, 140);
+          if (isScrolling) { pendingRefresh = true; return; }
+          doRefresh();
+        }, 180);
       };
 
       const animateDayContents = (item) => {
@@ -1431,6 +1738,7 @@ details[open] .chev{transform:rotate(180deg)}
       let dockLastT = performance.now();
       let dockVelocity = 0;
       let dockRaf = 0;
+      let dockPointerMovedY = 0;
 
       const dockMetrics = () => {
         if (!dock || !marker) return { step: 0, max: 0, item: 0 };
@@ -1517,6 +1825,13 @@ details[open] .chev{transform:rotate(180deg)}
           event.stopPropagation();
           if (dockMoved || dockDragging) return;
 
+          /* 误触保护：正在滚动、刚刚停止滚动、或这次触摸
+             其实是一次纵向滑动时，都不执行跳转。
+             dock 固定在底部，正好是拇指停放的位置。 */
+          if (isScrolling) return;
+          if (performance.now() - lastScrollEndAt < 220) return;
+          if (dockPointerMovedY > 10) return;
+
           animateDockToIndex(index, false, 0);
           navLinks.forEach(a => a.classList.toggle('active', a === link));
 
@@ -1540,6 +1855,7 @@ details[open] .chev{transform:rotate(180deg)}
           dockStartY = event.clientY;
           dockLastT = performance.now();
           dockVelocity = 0;
+          dockPointerMovedY = 0;
         });
 
         dock.addEventListener('pointermove', event => {
@@ -1547,6 +1863,7 @@ details[open] .chev{transform:rotate(180deg)}
 
           const totalX = event.clientX - dockStartX;
           const totalY = event.clientY - dockStartY;
+          dockPointerMovedY = Math.max(dockPointerMovedY, Math.abs(totalY));
 
           // Do not steal a normal vertical page swipe.
           if (!dockDragging) {
@@ -1606,7 +1923,7 @@ details[open] .chev{transform:rotate(180deg)}
             navLinks.forEach(a => a.classList.toggle('active', a === link));
 
             // Only a deliberate horizontal drag changes the page section.
-            if (Math.abs(totalX) >= 24) {
+            if (Math.abs(totalX) >= 24 && dockPointerMovedY <= 24 && !isScrolling) {
               const target = document.querySelector(link?.getAttribute('href'));
               if (target) {
                 target.scrollIntoView({
@@ -1767,13 +2084,24 @@ details[open] .chev{transform:rotate(180deg)}
       }
 
       const onResize = () => {
+        const dw = Math.abs(window.innerWidth - lastViewportW);
+        const dh = Math.abs(window.innerHeight - lastViewportH);
+        lastViewportW = window.innerWidth;
+        lastViewportH = window.innerHeight;
+
         const active = navLinks.find(link => link.classList.contains('active')) || navLinks[0];
         moveMarker(active, true);
+
+        /* 宽度没变、只是高度小幅变化 = iOS 地址栏收放，
+           这不是真正的尺寸变化，刷新只会造成回弹。 */
+        if (dw === 0 && dh <= 160) return;
         refreshVisuals();
       };
       window.addEventListener('resize', onResize, { passive: true });
       window.addEventListener('pagehide', () => {
         clearTimeout(refreshTimer);
+        clearTimeout(scrollIdleTimer);
+        window.removeEventListener('scroll', markScrolling);
         io.disconnect();
         window.removeEventListener('resize', onResize);
         window.removeEventListener('scroll', onDockScroll);
